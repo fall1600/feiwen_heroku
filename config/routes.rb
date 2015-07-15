@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
-  get 'pages/home'
+  #get 'pages/home'
   root 'pages#home'
+  put :fake_delete, controller: :posts
+
+  post :about, controller: :pages
+
+  resources :posts do
+    resources :tags, :controller => :post_tags
+  end
+
+  resources :tags do
+    get 'posts', to: "tags#posts_of_this_tag"
+  end
+
+  resources :users do
+    resources :posts, :controller => 'user_posts'
+  end
+
+  resource :session, :only => [ :create, :destroy ]
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

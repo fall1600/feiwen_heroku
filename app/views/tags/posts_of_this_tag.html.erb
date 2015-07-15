@@ -1,0 +1,21 @@
+<h1>有此標籤的文章</h1>
+<strong>標籤: </strong>
+<%= link_to @tag.name, tag_posts_path(@tag) %><br/>
+
+<strong>文章: </strong>
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= link_to post.user.name, user_posts_path(post.user) %>:
+      <%= link_to post.title, post %>
+      <%= post_status_signal post %>
+      <%= post.updated_at.to_formatted_s(:short) %>
+    </li><hr>
+  <% end %>
+</ul>
+
+<hr>
+
+<%= link_to '編輯標籤', edit_tag_path(@tag) %>
+<%= link_to '刪除標籤', tag_path(@tag), :method => :delete, :data => { :confirm => "你確定嗎?" } %>
+<%= link_to '上一頁', tags_path %>

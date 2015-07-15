@@ -1,0 +1,6 @@
+<h1>新增標籤</h1>
+
+<%= form_for @tag, :url => post_tags_path(@post) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>

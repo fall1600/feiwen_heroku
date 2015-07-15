@@ -1,0 +1,11 @@
+<h1>標籤列表</h1>
+<ol>
+  <% @tags.each do |tag| %>
+    <li class='tag'>
+      <%= link_to tag.name, tag_posts_path(tag) %>
+    </li>
+  <% end %>
+</ol>
+
+<%#= @hits_of_each_tag.inspect %>
+
