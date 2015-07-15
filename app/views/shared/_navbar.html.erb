@@ -17,9 +17,9 @@
   <%= form_tag session_path do %>
     <input type="text" name="email">
     <input type="password" name="password">
-    <input type="submit" value="登入"><br>
-    guest@demo.com/1234 for visitor
+    <input type="submit" value="登入">
   <% end %>
+  <%= link_to "new user", new_user_path %>
 <% end %>
 
 <% line_number.times do %>
