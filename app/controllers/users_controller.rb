@@ -7,8 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
+      flash[:notice] = "建立成功 #{@user.name}" 
       redirect_to :root
-    else 
+    else
       render :new
     end
   end
