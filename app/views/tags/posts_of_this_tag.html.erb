@@ -1,4 +1,4 @@
-<strong>有此標籤的文章</strong>
+<h2>有此標籤的文章</h2>
 <strong>標籤: </strong>
 <%= link_to @tag.name, tag_posts_path(@tag) %><br/>
 
@@ -10,7 +10,7 @@
       <%= link_to post.title, post %>
       <%= post_status_signal post %>
       <%= post.updated_at.to_formatted_s(:short) %>
-    </li><hr>
+    </li>
   <% end %>
 </ul>
 
