@@ -10,12 +10,13 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <%#= render 'shared/navbar', line_number: 1%>
-      <%= render 'shared/navbar' %>
-    </div>
-</nav>
+  <div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <%#= render 'shared/navbar', line_number: 1%>
+          <%= render 'shared/navbar' %>
+        </div>
+    </nav>
 
     <p style="color: green"><%= flash[:notice] %></p>
     <p style="color: red"><%= flash[:alert] %></p>
@@ -23,6 +24,7 @@
     <div class="span8">
       <%= yield %>
     </div>
+  </div>
 
 
 

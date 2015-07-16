@@ -6,28 +6,27 @@
     <%#= nav_li '關於', about_path %>
     <%#= nav_li '樂透', math_path %>
     <%#= nav_li '表單', form_path %>
-    <ul>
-      <%= nav_li '文章列表', posts_path %>
-      <%= nav_li '新增文章', new_post_path %>
-      <%= nav_li '標籤列表', tags_path %>
-      <%= nav_li '新增標籤', new_tag_path %>
-    </ul>
+    <%= nav_li '文章列表', posts_path %>
+    <%= nav_li '新增文章', new_post_path %>
+    <%= nav_li '標籤列表', tags_path %>
+    <%= nav_li '新增標籤', new_tag_path %>
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <% if user_signed_in? %>
+      你好, <%= link_to current_user.name, user_posts_path(current_user) %> |
+      <%= link_to "登出", session_path, method: :delete %>
+      <%= link_to '個人資料', user_path(current_user) %>
+    <% else %>
+      <%= form_tag session_path do %>
+        <input type="text" name="email">
+        <input type="password" name="password">
+        <input type="submit" value="登入">
+      <% end %>
+      <%= link_to "new user", new_user_path %>
+    <% end %>
   </ul>
 </div>
-
-<% if user_signed_in? %>
-  你好, <%= link_to current_user.name, user_posts_path(current_user) %> |
-  <%= link_to "登出", session_path, method: :delete %>
-  <%= link_to '個人資料', user_path(current_user) %>
-<% else %>
-  <%= form_tag session_path do %>
-    <input type="text" name="email">
-    <input type="password" name="password">
-    <input type="submit" value="登入">
-  <% end %>
-  <%= link_to "new user", new_user_path %>
-<% end %>
-
 <%# line_number.times do %>
   <!--<hr> -->
 <%# end %>
