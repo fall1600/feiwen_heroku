@@ -13,6 +13,7 @@
 <% if user_signed_in? %>
   你好, <%= link_to current_user.name, user_posts_path(current_user) %> |
   <%= link_to "登出", session_path, method: :delete %>
+  <%= link_to '個人資料', user_path(current_user) %>
 <% else %>
   <%= form_tag session_path do %>
     <input type="text" name="email">

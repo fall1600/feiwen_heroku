@@ -1,0 +1,4 @@
+<li>Name: <%= link_to @user.name, user_posts_path(@user) %></li>
+<li>Email: <%= @user.email %></li>
+<li>About: <%= @user.about %></li>
+<li><%= link_to "edit profile", edit_user_path(@user) %></li>

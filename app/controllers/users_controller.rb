@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
   end
@@ -15,9 +19,19 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+
+    @user = User.find(params[:id])
+    if @user.update user_params
+      flash[:notice] = "修改成功 - #{@user.updated_at.to_formatted_s(:short)}"
+      redirect_to @user
+    else
+      flash[:alert] = "修改失敗 :("
+      render :edit
+    end
   end
 
   protected
