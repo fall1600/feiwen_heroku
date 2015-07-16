@@ -1,11 +1,11 @@
 <strong>文章列表 (public posts)</strong>
-  <% @posts.each do |post| %>
-    <div class="span4">
-      <%= user_link post, user_posts_path(post.user) %>:
-      <%= post_status_signal post %>
-      <%= link_to post.title, post, :class => "post"%>
-      <%= post.updated_at.to_formatted_s(:short) %>
-    </div>
-    <hr>
-  <% end %>
+<% @posts.each do |post| %>
+  <div class="span4">
+    <%= user_link post, user_posts_path(post.user) %>:
+    <%= post_status_signal post %>
+    <%= link_to post.title, post, :class => "post"%>
+    <%= post.updated_at.to_formatted_s(:short) %>
+  </div>
+  <hr>
+<% end %>
 

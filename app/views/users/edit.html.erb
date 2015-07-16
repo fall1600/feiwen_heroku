@@ -1,18 +1,3 @@
 <strong>edit user</strong>
-
-<div>
-  <%= form_for @user do |f| %>
-    <%= f.label :name, "Name:" %>
-    <%= f.text_field :name %><br>
-    <%= f.label :about, "About:" %>
-    <%= f.text_area :about %><br>
-    <%= f.label :email, "Email:" %>
-    <%= f.text_field :email %><br>
-    <%= f.label :password, "Password:" %>
-    <%= f.password_field :password %><br>
-    <%= f.label :password_confirmation, "Password confirmation:" %>
-    <%= f.password_field :password_confirmation %><br>
-    <%= f.submit %>
-    <%= button_to "cancel", :back %>
-  <% end %>
-</div>
+<%= render 'form' %>
+<%= button_to 'cancel', :back %>
