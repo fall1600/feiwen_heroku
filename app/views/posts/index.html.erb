@@ -3,7 +3,7 @@
   <div class="span4">
     <%= user_link post, user_posts_path(post.user) %>:
     <%= post_status_signal post %>
-    <%= link_to post.title, post, :class => "post"%>
+    <%= link_to post.title, post %>
     <%= post.updated_at.to_formatted_s(:short) %>
   </div>
   <hr>
