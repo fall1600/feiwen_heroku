@@ -10,7 +10,8 @@ class Post < ActiveRecord::Base
   
   has_many :post_tagships
   has_many :tags, :through => :post_tagships
-  
+  has_many :replies
+
   belongs_to :user
 
   after_initialize :init

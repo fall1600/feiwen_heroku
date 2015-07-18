@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     resources :posts, :controller => 'user_posts'
   end
 
+  resources :posts do
+    resources :replys, :controller => 'post_replys'
+  end
+
   resource :session, :only => [ :create, :destroy ]
   
   # The priority is based upon order of creation: first created -> highest priority.
