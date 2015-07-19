@@ -2,26 +2,40 @@
 
 <% @posts.each do |post| %>
   <div class="panel panel-default">
+
     <div class="panel-heading">
         <%= post.title %>
         <%= post.updated_at.to_formatted_s(:short) %>
     </div>
+
     <div class="panel-body">
       <%= user_link post, user_posts_path(post.user) %>:
       <%= post.content %>
-
-      <%= form_for post.replies.create, :url => post_replies_path(post) do |f| %>
-        <%= f.text_field :content %>
-        <%= f.submit %>
-      <% end %>
-
     </div>
 
     <div class="panel-footer">
+
       <%= render 'post_replies/reply', :post => post %>
+          
+      <div class="row">
+
+        <div class="span3">
+          <%= current_user.name %>:
+        </div>
+
+        <div class="span6">
+          <%= form_for post.replies.create, :url => post_replies_path(post) do |f| %>
+            <%= f.text_field :content, placeholder: "write a comment..." %>
+            <%= f.submit "submit", :style => "display: none" %>
+          <% end %>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
+
 <% end %>
 
 
