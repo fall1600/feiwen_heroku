@@ -1,5 +1,7 @@
 module ReplyDisplayHelper
   def reply_display reply
-    content_tag :li, "#{reply.user.name}: #{reply.content}"
+    if reply.content
+      content_tag :span, "#{reply.user.try(:name)}: #{reply.content}"
+    end
   end
 end

@@ -4,7 +4,7 @@
 by
 <%= @post.user.try(:name) %>
 
-<%= render 'post_replys/reply' %>
+<%= render 'post_replies/reply', :post => @post %>
 
 <p>
   標籤:

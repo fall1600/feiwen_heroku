@@ -1,12 +1,27 @@
 <h2>文章列表 (public posts)</h2>
-<ul>
-  <% @posts.each do |post| %>
-    <li>
+
+<% @posts.each do |post| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        <%= post.title %>
+        <%= post.updated_at.to_formatted_s(:short) %>
+    </div>
+    <div class="panel-body">
       <%= user_link post, user_posts_path(post.user) %>:
-      <%= post_status_signal post %>
-      <%= link_to post.title, post %>
-      <%= post.updated_at.to_formatted_s(:short) %>
-    </li>
-  <% end %>
-</ul>
+      <%= post.content %>
+
+      <%= form_for post.replies.create, :url => post_replies_path(post) do |f| %>
+        <%= f.text_field :content %>
+        <%= f.submit %>
+      <% end %>
+
+    </div>
+
+    <div class="panel-footer">
+      <%= render 'post_replies/reply', :post => post %>
+    </div>
+
+  </div>
+<% end %>
+
 

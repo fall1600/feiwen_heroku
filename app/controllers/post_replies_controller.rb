@@ -1,4 +1,6 @@
-class PostReplysController < ApplicationController
+class PostRepliesController < ApplicationController
+
+  before_action :authenticate_user!, :except => [:show]
 
   def index
     @post = Post.find(params[:post_id])
@@ -19,7 +21,7 @@ class PostReplysController < ApplicationController
     @reply = @post.replies.create(reply_params)
     @reply.user_id = current_user.id if current_user
     if @reply.save
-      redirect_to @post
+      redirect_to posts_path
     else
       render :new
     end

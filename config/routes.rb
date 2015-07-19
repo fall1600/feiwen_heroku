@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  #get 'pages/home'
-  root 'pages#home'
+  
+  #root 'pages#posts'
+  root 'posts#index'
+  get 'pages/home'
   put :fake_delete, controller: :posts
 
   post :about, controller: :pages
@@ -18,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :replys, :controller => 'post_replys'
+    resources :replies, :controller => 'post_replies'
   end
 
   resource :session, :only => [ :create, :destroy ]
