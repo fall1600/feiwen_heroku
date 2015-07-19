@@ -16,21 +16,23 @@
     <div class="panel-footer">
 
       <%= render 'post_replies/reply', :post => post %>
-          
-      <div class="row">
+      
+      <% if user_signed_in? %>    
+        <div class="row">
 
-        <div class="span3">
-          <%= current_user.name %>:
+          <div class="span3">
+            <%= current_user.name %>:
+          </div>
+
+          <div class="span6">
+            <%= form_for post.replies.create, :url => post_replies_path(post) do |f| %>
+              <%= f.text_field :content, placeholder: "write a comment..." %>
+              <%= f.submit "submit", :style => "display: none" %>
+            <% end %>
+          </div>
+
         </div>
-
-        <div class="span6">
-          <%= form_for post.replies.create, :url => post_replies_path(post) do |f| %>
-            <%= f.text_field :content, placeholder: "write a comment..." %>
-            <%= f.submit "submit", :style => "display: none" %>
-          <% end %>
-        </div>
-
-      </div>
+      <% end %>
 
     </div>
 
