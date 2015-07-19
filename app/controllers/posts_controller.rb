@@ -28,7 +28,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice] = "新增文章成功"
-      redirect_to @post
+      redirect_to posts_path #@post
     else
       flash[:alert] = "新增文章失敗"
       render :new

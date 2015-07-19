@@ -1,4 +1,16 @@
-<h2>文章列表 (public posts)</h2>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <% if user_signed_in? %>
+      <%= current_user.name %>:
+    <% end %>
+  </div>
+
+  <div class="panel-body">
+    <%= render "new_form", :post => Post.new %>
+  </div>
+</div>
+
+<!--<h2>文章列表 (public posts)</h2>-->
 
 <% @posts.each do |post| %>
   <div class="panel panel-default">
