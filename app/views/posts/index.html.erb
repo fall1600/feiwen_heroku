@@ -1,4 +1,4 @@
-<div class="panel panel-info">
+<div class="panel panel-primary">
   <div class="panel-heading">
     <% if user_signed_in? %>
       <%= current_user.name %>:
@@ -23,6 +23,16 @@
     <div class="panel-body">
       <%= user_link post, user_posts_path(post.user) %>:
       <%= post.content %>
+      <hr>
+
+      <div>
+        <span class="glyphicon glyphicon-tags"></span>
+        &nbsp
+        <% post.tags.each do |tag| %>
+          <%= link_to "• #{tag.name}", tag_posts_path(tag) %>
+        <% end %>
+      </div>
+    
     </div>
 
     <div class="panel-footer">
@@ -30,13 +40,13 @@
       <%= render 'post_replies/reply', :post => post %>
       
       <% if user_signed_in? %>    
-        <div class="row">
+        <div class="row-fluid">
 
-          <div class="span3">
+          <div class="">
             <%= current_user.name %>:
           </div>
 
-          <div class="span6">
+          <div class="">
             <%= form_for post.replies.create, :url => post_replies_path(post) do |f| %>
               <%= f.text_field :content, placeholder: "write a comment..." %>
               <%= f.submit "submit", :style => "display: none" %>
@@ -44,7 +54,8 @@
           </div>
 
         </div>
-      <% end %>
+
+      <% end %> 
 
     </div>
 
