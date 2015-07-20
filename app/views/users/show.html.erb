@@ -1,5 +1,13 @@
-<h2>Profile</h2>
-<li>Name: <%= link_to @user.name, user_posts_path(@user) %></li>
-<li>Email: <%= @user.email %></li>
-<li>About: <%= @user.about %></li>
-<li><%= link_to "edit", edit_user_path(@user)%></li>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    個人資料
+  </div>
+  <div class="panel-body">
+    帳號: <%= link_to @user.name, user_posts_path(@user) %><br>
+    電子信箱: <%= @user.email %><br>
+    簡介: <%= @user.about %><br>
+  </div>
+  <div class="panel-footer">
+    <%= link_to "編輯", edit_user_path(@user)%>
+  </div>
+</div>

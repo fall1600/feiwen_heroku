@@ -1,11 +1,16 @@
-<h2>標籤列表</h2>
-<ol>
-  <% @tags.each do |tag| %>
-    <li class='tag'>
-      <%= link_to tag.name, tag_posts_path(tag) %>
-    </li>
-  <% end %>
-</ol>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    標籤列表
+  </div>
+  <div class="panel-body">
+    <ol>
+      <% @tags.each do |tag| %>
+        <li class='tag'>
+          <%= link_to tag.name, tag_posts_path(tag) %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>
 
 <%#= @hits_of_each_tag.inspect %>
-

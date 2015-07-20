@@ -1,11 +1,16 @@
-<%= link_to @user.name, user_posts_path(@user) %>的文章
-<ul>
-<% @posts.each do |post| %>
-  <li>
-    <%= link_to post.title, post %>
-    <%= post_status_signal post %>
-    <%= post.updated_at.to_formatted_s(:short) %>
-  </li>
-  <hr>
-<% end %>
-</ul>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= link_to @user.name, user_posts_path(@user) %> 的費文
+  </div>
+  <div class="panel-body">
+    <ul>
+    <% @posts.each do |post| %>
+      <li>
+        <%= link_to post.title, post %>
+        <%= post_status_signal post %>
+        <%= post.updated_at.to_formatted_s(:short) %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</div>
