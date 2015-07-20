@@ -9,7 +9,7 @@
     <span class="glyphicon glyphicon-tags"></span>
   </span>&nbsp
   <%= f.label :tag_ids, "標籤: " %><br>
-  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) %><br>
+  <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
   <%= f.label :status, "status: " %><br>  
   <%= f.select :status, Post.where("status != ?", "deleted").uniq.pluck(:status) %>
   <%= f.submit "送出" %>

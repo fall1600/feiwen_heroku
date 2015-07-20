@@ -1,15 +1,13 @@
-<div class="navbar-header">
-  <%= nav_li '開發日誌', pages_home_path %>
-</div>
 <div class="navbar-collapse collapse">
   <ul class="nav navbar-nav">
+    <%= nav_li '開發日誌', pages_home_path %>
+    <%= nav_li '首頁', posts_path %>
+    <%= nav_li '標籤列表', tags_path %>
+    <%= nav_li '新增標籤', new_tag_path %>
+    <%#= nav_li '新增文章', new_post_path %>
     <%#= nav_li '關於', about_path %>
     <%#= nav_li '樂透', math_path %>
     <%#= nav_li '表單', form_path %>
-    <%= nav_li '首頁', posts_path %>
-    <%#= nav_li '新增文章', new_post_path %>
-    <%= nav_li '標籤列表', tags_path %>
-    <%= nav_li '新增標籤', new_tag_path %>
   </ul>
 
   <ul class="nav navbar-nav navbar-right">
@@ -27,19 +25,3 @@
     <% end %>
   </ul>
 </div>
-<%# line_number.times do %>
-  <!--<hr> -->
-<%# end %>
-<!--
-<ul>
-  <li><%#= link_to 'page', root_path %></li>
-  <li><%#= link_to 'about me', about_path %></li>
-  <li><%#= link_to 'lottory', math_path %></li>
-</ul>
-
-<ul>
-  <li><a href="/">home page</a></li>
-  <li><a href="/about">about me</a></li>
-  <li><a href="/math">lottory</a></li>
-</ul>
--->
