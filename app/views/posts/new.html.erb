@@ -1,5 +1,12 @@
-<h2>新增文章</h2>
-<%= render 'form' %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    新增文章
+  </div>
+  <div class="panel-body">
+    <%= render 'form', :post => Post.new %>
+  </div>
+</div>
+<%#= render 'form' %>
 
 <%#= form_for @post do |f| %>
   <%#= f.text_field :title %>

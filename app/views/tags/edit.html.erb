@@ -1,5 +1,12 @@
-<h2>編輯標籤</h2>
-<%= render 'form' %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    編輯標籤
+  </div>
+  <div class="panel-body">
+    <%= render 'new_form', :tag => Tag.find(params[:id]) %>
+  </div>
+</div>
+<%#= render 'form' %>
 
 <%#= form_for @tag do |f| %>
   <%#= f.text_field :name %>

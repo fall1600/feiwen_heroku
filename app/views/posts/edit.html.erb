@@ -1,5 +1,11 @@
-<h2>編輯文章</h2>
-<%= render 'form' %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    編輯文章
+  </div>
+  <div class="panel-body">
+    <%= render 'form', :post => Post.find(params[:id]) %>
+  </div>
+</div>
 
 <%#= form_for @post do |f| %>
   <%#= f.text_field :title %>

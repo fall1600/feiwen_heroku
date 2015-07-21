@@ -5,7 +5,7 @@
     </div>
 
     <div class="panel-body">
-      <%= render "new_form", :post => Post.new %>
+      <%= render "form", :post => Post.new %>
     </div>
   </div>
 <% end %>
@@ -16,7 +16,7 @@
   <div class="panel panel-default">
 
     <div class="panel-heading">
-        <%= post.title %>
+        <%= link_to post.title, post_path(post) %>
         <%= post.updated_at.to_formatted_s(:short) %>
     </div>
 
