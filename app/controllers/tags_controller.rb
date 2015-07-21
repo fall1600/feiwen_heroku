@@ -1,6 +1,8 @@
 class TagsController < ApplicationController
 
   #before_action :authenticate_user!, :except => [:index]
+
+  before_action :authenticate_user!, :except => [:index, :show]
   before_action :find_tag, :only => [ :show, :edit, :update, :destroy ]
 
   def index
@@ -31,8 +33,8 @@ class TagsController < ApplicationController
       @tag.save
     rescue ActiveRecord::RecordNotUnique => e
       flash[:alert] = " #{@tag.name} 早就有囉, 換一個吧 :)"
-      redirect_to tags_path
     end
+    redirect_to tags_path
     #if @tag.save
     #  flash[:notice] = "新增標籤成功"
     #  redirect_to tags_path
