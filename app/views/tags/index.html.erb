@@ -11,6 +11,10 @@
       <% end %>
     </ol>
   </div>
+  <div class="panel-footer">
+    <%= render "new_form", :tag => Tag.new %>
+    <%#= link_to "新增標籤", new_tag_path %>
+  </div>
 </div>
 
 <%#= @hits_of_each_tag.inspect %>

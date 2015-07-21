@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>費文王</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>費文王</title>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-  <div class="container">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="container-fluid">
-          <%#= render 'shared/navbar', line_number: 1%>
-          <%= render 'shared/navbar' %>
-        </div>
-      </div>
-    </nav>
-
-    <p style="color: green"><%= flash[:notice] %></p>
-    <p style="color: red"><%= flash[:alert] %></p>
-
-    <!--<div class="jumbotron">-->
-    <br><br>
     <div class="container">
-      <%= yield %>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="container-fluid">
+            <%= render 'shared/navbar' %>
+            <%#= render 'shared/navbar', line_number: 1%>
+          </div>
+        </div>
+      </nav>
+      <!--<div class="jumbotron">-->
+      <br><br><br>
+      <div class="row">
+        <p style="color: green"><%= flash[:notice] %></p>
+        <p style="color: red"><%= flash[:alert] %></p>
+      </div>
+
+      <div class="row">
+        <%= yield %>
+      </div>
     </div>
-  </div>
-
-
-
-</body>
+  </body>
 </html>

@@ -26,13 +26,20 @@ class TagsController < ApplicationController
 
   def create
     @tag = Tag.new tag_params
-    if @tag.save
-      flash[:notice] = "新增標籤成功"
+
+    begin
+      @tag.save
+    rescue ActiveRecord::RecordNotUnique => e
+      flash[:alert] = " #{@tag.name} 早就有囉, 換一個吧 :)"
       redirect_to tags_path
-    else
-      flash[:alert] = "新增標籤失敗"
-      render :new
     end
+    #if @tag.save
+    #  flash[:notice] = "新增標籤成功"
+    #  redirect_to tags_path
+    #else
+    #  flash[:alert] = "新增標籤失敗"
+    #  render :new
+    #end
   end
 
   def edit

@@ -1,14 +1,14 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <% if user_signed_in? %>
-      <%= current_user.name %>:
-    <% end %>
-  </div>
+<% if user_signed_in? %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+        <%= current_user.name %>:
+    </div>
 
-  <div class="panel-body">
-    <%= render "new_form", :post => Post.new %>
+    <div class="panel-body">
+      <%= render "new_form", :post => Post.new %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <!--<h2>文章列表 (public posts)</h2>-->
 
