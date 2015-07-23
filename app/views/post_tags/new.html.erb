@@ -1,6 +1,11 @@
-<h2>新增標籤</h2>
-
-<%= form_for @tag, :url => post_tags_path(@post) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
-<% end %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    新增標籤
+  </div>
+  <div class="panel-body">
+    <%= form_for @tag, :url => post_tags_path(@post) do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit "送出" %>
+    <% end %>
+  </div>
+</div>

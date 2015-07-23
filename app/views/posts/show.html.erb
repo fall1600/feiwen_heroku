@@ -15,18 +15,15 @@
       <span class="glyphicon glyphicon-tags"></span>
     </span>&nbsp
     <% @post.tags.each do |tag| %>
-      <%= link_to "• #{tag.name}", tag_posts_path(tag) %>
+      <%= link_to "• #{tag.name}", posts_tag_path(tag) %>
     <% end %>
 
   </div>
   <div class="panel-footer">
     <%= link_to '新增標籤', new_post_tag_path(@post) %>
     <%= link_to '編輯', edit_post_path(@post) %>
-    <%= link_to '刪除', fake_delete_path(@post), method: :put, :data => {confirm: "你確定嗎?"} %>
+    <%= link_to '刪除', fake_delete_post_path(@post), method: :put, :data => {confirm: "你確定嗎?"} %>
     <%#= link_to '真刪除', @post, method: :delete, :data => {:confirm => "你確定嗎?"} %>
-    <%#= link_to '回應', new_post_reply_path(@post) %>
-    
-    <%#= link_to '上一頁', posts_path %>
   </div>
 </div>
 

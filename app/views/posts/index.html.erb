@@ -29,7 +29,7 @@
         <span class="glyphicon glyphicon-tags"></span>
         &nbsp
         <% post.tags.each do |tag| %>
-          <%= link_to "• #{tag.name}", tag_posts_path(tag) %>
+          <%= link_to "• #{tag.name}", posts_tag_path(tag) %>
         <% end %>
       </div>
     

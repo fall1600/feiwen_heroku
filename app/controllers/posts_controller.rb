@@ -63,7 +63,8 @@ class PostsController < ApplicationController
 
   # update status to 'deleted', server keeps this post in case
   def fake_delete
-    @post = Post.find(params[:format])
+    #@post = Post.find(params[:format])
+    @post = Post.find(params[:id])
     if @post.user_id == session[:user_id]
       @post.status = "deleted"
       @post.save

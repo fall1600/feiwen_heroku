@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   #root 'pages#posts'
   root 'posts#index'
   get 'pages/home'
-  put :fake_delete, controller: :posts
 
   post :about, controller: :pages
 
@@ -12,15 +11,23 @@ Rails.application.routes.draw do
   end
 
   resources :tags do
-    get 'posts', to: "tags#posts_of_this_tag"
+    member do
+      get :posts
+      # if you want to build feature about hot tags 
+      # get :hot 
+    end
   end
 
   resources :users do
     resources :posts, :controller => 'user_posts'
   end
 
+  # put :fake_delete, controller: :posts
   resources :posts do
     resources :replies, :controller => 'post_replies'
+    member do
+      put :fake_delete
+    end
   end
 
   resource :session, :only => [ :create, :destroy ]

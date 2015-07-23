@@ -1,9 +1,7 @@
 class TagsController < ApplicationController
 
-  #before_action :authenticate_user!, :except => [:index]
-
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :find_tag, :only => [ :show, :edit, :update, :destroy ]
+  before_action :find_tag, :only => [:show, :edit, :update, :destroy, :posts]
 
   def index
     @tags = Tag.all
@@ -64,14 +62,18 @@ class TagsController < ApplicationController
     redirect_to tags_path
   end
 
-  def posts_of_this_tag
-    @tag = Tag.find(params[:tag_id])
+  def posts
     @posts = @tag.posts.where("status = ? OR status != ? AND user_id = ? ", "public", "deleted", session[:user_id]).order("updated_at DESC")
-    render :posts_of_this_tag
+    render :posts_tag
   end
 
-  def hot_tag
+  #def posts_of_this_tag
+  #  @tag = Tag.find(params[:tag_id])
+  #  @posts = @tag.posts.where("status = ? OR status != ? AND user_id = ? ", "public", "deleted", session[:user_id]).order("updated_at DESC")
+  #  render :posts_of_this_tag
+  #end
 
+  def hot_tag
   end
 
   protected

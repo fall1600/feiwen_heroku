@@ -6,7 +6,8 @@
     <ol>
       <% @tags.each do |tag| %>
         <li class='tag'>
-          <%= link_to tag.name, tag_posts_path(tag) %>
+          <%#= link_to tag.name, tag_posts_path(tag) %>
+          <%= link_to tag.name, posts_tag_path(tag) %>
         </li>
       <% end %>
     </ol>
