@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   #root 'pages#posts'
   root 'posts#index'
   get 'pages/home'
-
+  get 'pages/login'
+  
   post :about, controller: :pages
 
   resources :posts do

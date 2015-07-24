@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+  <%= form_tag session_path do %>
+    <input type="text" name="email">
+    <input type="password" name="password">
+    <input type="submit" value="登入">
+  <% end %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to "新增帳戶", new_user_path %>
+  </div>
+</div>

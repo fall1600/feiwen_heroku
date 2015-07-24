@@ -12,16 +12,24 @@
 
   <ul class="nav navbar-nav navbar-right">
     <% if user_signed_in? %>
-      你好, <%= link_to current_user.name, user_posts_path(current_user) %> |
-      <%= link_to "登出", session_path, method: :delete %>
-      <%= link_to '個人資料', user_path(current_user) %>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <%= current_user.name %>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "我的費文 :D", user_posts_path(current_user) %></li>
+          <li><%= link_to "個人資料", user_path(current_user) %></li>
+          <li role="separator" class="divider"></li>
+          <li><%= link_to "登出", session_path, method: :delete %></li>
+        </ul>
+      </li>
+
+      <%#= link_to current_user.name, user_posts_path(current_user) %> 
+      <%#= link_to "登出", session_path, method: :delete %>
+      <%#= link_to '個人資料', user_path(current_user) %>
     <% else %>
-      <%= form_tag session_path do %>
-        <input type="text" name="email">
-        <input type="password" name="password">
-        <input type="submit" value="登入">
-      <% end %>
-      <%= link_to "new user", new_user_path %>
+      <%= nav_li "登入", pages_login_path %>
     <% end %>
   </ul>
 </div>

@@ -1,5 +1,6 @@
 class PostTagsController < ApplicationController
   
+  before_action :authenticate_user!
   before_action :find_post, :only => [:new, :create]
 
   def new
@@ -7,7 +8,6 @@ class PostTagsController < ApplicationController
   end
 
   def create
-    
     @tag = @post.tags.create tag_params
     if @tag.save
       redirect_to @post

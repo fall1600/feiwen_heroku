@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     unless user_signed_in?
-      flash[:notice] = "please login"
+      flash[:notice] = "請先登入 :)"
       redirect_to request.referer
     end
   end

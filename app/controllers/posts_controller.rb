@@ -2,9 +2,10 @@ class PostsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index, :show]
 
-  before_action :find_post, :only => [:show, :edit, :update, :destroy, :posts_of_this_user]
+  before_action :find_post, :only => [:show, :edit, :update, :destroy, :fake_delete, :posts_of_this_user]
 
   def index
+    @posts = Post.where("status = ? OR status = ? AND user_id = ?", 'public', 'private', session[:user_id]).order("updated_at DESC")
     #@public_posts = Post.where(status: 'public')
     #@private_posts = Post.where(status: 'private')
     #             .where(user_id: session[:user_id])
@@ -12,7 +13,6 @@ class PostsController < ApplicationController
     #@posts.sort!{ |a, b| b.updated_at <=> a.updated_at }
     
     # 在 sql, 'AND' 優先於 'OR'
-    @posts = Post.where("status = ? OR status = ? AND user_id = ?", 'public', 'private', session[:user_id]).order("updated_at DESC")
   end
 
   def show
@@ -24,7 +24,8 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new post_params
-    @post.user_id = (session[:user_id] || -1)
+    @post.user_id = (session[:user_id] || 1)
+    # user with id 1 is for guest if any accident
 
     if @post.save
       flash[:notice] = "新增文章成功"
@@ -37,7 +38,7 @@ class PostsController < ApplicationController
 
   def edit
     if @post.user_id != session[:user_id]
-      flash[:alert] = "you can't edit this post"
+      flash[:alert] = "你不能編輯這篇文章唷 o'_'o"
       redirect_to @post
     end
   end
@@ -63,8 +64,6 @@ class PostsController < ApplicationController
 
   # update status to 'deleted', server keeps this post in case
   def fake_delete
-    #@post = Post.find(params[:format])
-    @post = Post.find(params[:id])
     if @post.user_id == session[:user_id]
       @post.status = "deleted"
       @post.save
@@ -74,12 +73,6 @@ class PostsController < ApplicationController
       redirect_to @post
     end
   end
-
-  #def posts_of_this_user
-    #@user = User.find(params[:user_id])
-    #@user = @post.user
-    #render :posts_of_this_user
-  #end
 
   protected
 
