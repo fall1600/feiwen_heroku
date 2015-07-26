@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  
+  #include Paperclip::Glue
   before_action :authenticate_user!, :except => [:index, :show]
 
   before_action :find_post, :only => [:show, :edit, :update, :destroy, :fake_delete, :posts_of_this_user]

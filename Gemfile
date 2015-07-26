@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'paperclip', '~>4.3'
+
 gem 'bootstrap-sass', '~>3.2.0'
 gem 'autoprefixer-rails'
 
