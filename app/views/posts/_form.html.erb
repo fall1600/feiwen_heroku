@@ -3,6 +3,7 @@
   <%= f.text_field :title, placeholder: "what's on your mind?" %><br>
   <%= f.label :content, "內容: " %><br>
   <%= f.text_area :content %><br>
+  <%= f.file_field :image %>
   <%#= f.label :user_id, "名字: " %><br>
   <%#= f.collection_select :user_id, User.all, :id, :name %><br>
   <span>
