@@ -3,7 +3,6 @@
     個人資料
   </div>
   <div class="panel-body">
-    <%= image_tag @user.profile_picture.url(:medium) %><br>
     帳號: <%= link_to @user.name, user_posts_path(@user) %><br>
     電子信箱: <%= @user.email %><br>
     簡介: <%= @user.about %><br>

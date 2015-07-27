@@ -24,6 +24,10 @@
           <li><%= link_to "登出", session_path, method: :delete %></li>
         </ul>
       </li>
+
+      <%#= link_to current_user.name, user_posts_path(current_user) %> 
+      <%#= link_to "登出", session_path, method: :delete %>
+      <%#= link_to '個人資料', user_path(current_user) %>
     <% else %>
       <%= nav_li "登入", pages_login_path %>
     <% end %>

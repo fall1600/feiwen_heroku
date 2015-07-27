@@ -1,8 +1,7 @@
 <% if user_signed_in? %>
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <%= image_tag current_user.profile_picture.url(:thumb) %>
-      <%= current_user.name %>:
+        <%= current_user.name %>:
     </div>
 
     <div class="panel-body">
@@ -18,11 +17,10 @@
 
     <div class="panel-heading">
         <%= link_to post.title, post_path(post) %>
-        at <%= post.updated_at.to_formatted_s(:short) %>
+        <%= post.updated_at.to_formatted_s(:short) %>
     </div>
 
     <div class="panel-body">
-      <%= image_tag post.user.profile_picture.url(:thumb) %>
       <%= user_link post, user_posts_path(post.user) %>:
       <%= post.content %>
       <hr>
