@@ -16,6 +16,10 @@ class Post < ActiveRecord::Base
 
   after_initialize :init
 
+  has_attached_file :image, :styles => {:medium => "300*300>"}
+  #has_attached_file :image, :styles => {:medium => "300*300>"}, :default_url => "/images/:style/missing.png"
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+
   def init
     self.user_id = '-1' unless user_id
   end

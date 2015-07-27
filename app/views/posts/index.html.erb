@@ -2,7 +2,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <%= image_tag current_user.profile_picture.url(:thumb) %>
-      <%= current_user.name %>:
+      <%#= current_user.name %>
     </div>
 
     <div class="panel-body">
@@ -23,8 +23,15 @@
 
     <div class="panel-body">
       <%= image_tag post.user.profile_picture.url(:thumb) %>
-      <%= user_link post, user_posts_path(post.user) %>:
+      <%= user_link post, user_posts_path(post.user) %>
       <%= post.content %>
+      
+        <div>
+        <% unless post.image.url.nil? %>
+          <%= image_tag post.try(:image) %>
+        <% end %>
+        </div>
+      
       <hr>
 
       <div>
