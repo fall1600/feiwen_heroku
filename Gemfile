@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'aws-sdk'
-
 gem 'paperclip', '~>4.3'
 
 gem 'bootstrap-sass', '~>3.2.0'
