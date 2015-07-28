@@ -19,7 +19,7 @@ class ForumPostsController < ApplicationController
     @post.user_id = (session[:user_id] || 1)
     if @post.save
       #redirect_to post_path(@post)
-      redirect_to forum_post_path(@post)
+      redirect_to forum_post_path(@forum, @post)
       #redirect_to forum_post_path(@forum, @post)
     else
       render new_forum_post_path(@post)
