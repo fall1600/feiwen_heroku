@@ -16,8 +16,9 @@
   <div class="panel panel-default">
 
     <div class="panel-heading">
-        <%= link_to post.title, post_path(post) %>
-        <%= post.updated_at.to_formatted_s(:short) %>
+      <%= link_to post.title, post_path(post) %>
+      <%= post.updated_at.to_formatted_s(:short) %>
+      <%= post.forum.try(:name) %>
     </div>
 
     <div class="panel-body">

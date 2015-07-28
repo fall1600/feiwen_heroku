@@ -23,8 +23,10 @@ class PostsController < ApplicationController
   end
 
   def create
+   # @forum = Forum.find(params[:forum_id])
     @post = Post.new post_params
     @post.user_id = (session[:user_id] || 1)
+    #@post.forum_id = @forum.id
     # user with id 1 is for guest if any accident
 
     if @post.save
@@ -81,7 +83,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :user_id, :status, :tag_ids => [])
+    params.require(:post).permit(:title, :content, :user_id, :status, :forum_id, :tag_ids => [])
   end
   
 end

@@ -7,10 +7,6 @@ Rails.application.routes.draw do
   
   post :about, controller: :pages
 
-  resources :posts do
-    resources :tags, :controller => :post_tags
-  end
-
   resources :tags do
     member do
       get :posts
@@ -19,13 +15,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :forums do
+    resources :posts, :controller => :forum_posts
+  end
+
   resources :users do
-    resources :posts, :controller => 'user_posts'
+    resources :posts, :controller => :user_posts
   end
 
   # put :fake_delete, controller: :posts
   resources :posts do
-    resources :replies, :controller => 'post_replies'
+    resources :tags, :controller => :post_tags
+    resources :replies, :controller => :post_replies
     member do
       put :fake_delete
     end

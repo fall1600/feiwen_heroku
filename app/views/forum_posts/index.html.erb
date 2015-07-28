@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "#{@forum.name} 板" %>
+  </div>
+  <div class="panel-body">
+  <% @posts.each do |post| %>
+    <%= link_to post.title, post_path(post) %><br>
+  <% end %>
+  </div>
+  <div class="panel-footer">
+    <%= link_to 'po 個費文', new_forum_post_path(@forum) %>
+  </div>
+</div>

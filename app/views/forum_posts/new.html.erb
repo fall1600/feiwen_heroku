@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= "#{@forum.name} 板" %>
+  </div>
+  <div class="panel-body">
+    <%= form_for @post, :url => forum_posts_path(@forum) do |f| %>
+      <%= f.label :title, "標題: " %><br>
+      <%= f.text_field :title, placeholder: "what's on your mind?" %><br>
+      <%= f.label :content, "內容: " %><br>
+      <%= f.text_area :content %><br>
+      <%#= f.label :user_id, "名字: " %><br>
+      <%#= f.collection_select :user_id, User.all, :id, :name %><br>
+      <span>
+        <span class="glyphicon glyphicon-tags"></span>
+      </span>&nbsp
+      <%= f.label :tag_ids, "標籤: " %><br>
+      <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %><br>
+      <%= f.label :status, "status: " %><br>  
+      <%= f.select :status, Post.where("status != ?", "deleted").uniq.pluck(:status) %>
+      <%= f.submit "送出" %>
+
+      <%#= f.label :forum_id, "forum: " %>
+      <%#= f.select :forum_id, Forum.all.pluck(:name) %>
+    <% end %>
+  </div>
+</div>

@@ -11,14 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20150721134621) do
-=======
-ActiveRecord::Schema.define(version: 20150726020027) do
->>>>>>> parent of 3842b1a... post with img
+ActiveRecord::Schema.define(version: 20150728075248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "forum_postships", force: :cascade do |t|
+    t.integer  "forum_id"
+    t.integer  "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "forums", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "post_tagships", force: :cascade do |t|
     t.integer  "post_id"
@@ -36,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150726020027) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
+    t.integer  "forum_id"
   end
 
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
