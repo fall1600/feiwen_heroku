@@ -18,7 +18,9 @@
     <div class="panel-heading">
       <%= link_to post.title, post_path(post) %>
       <%= post.updated_at.to_formatted_s(:short) %>
-      <%= post.forum.try(:name) %>
+      <% if post.forum %>
+        <%= link_to post.forum.name, forum_posts_path(post.forum) %>
+      <% end %>
     </div>
 
     <div class="panel-body">

@@ -1,10 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <% @forums.each do |forum| %>
-    <%= link_to forum.name, forum_posts_path(forum) %><br>
+    <%= link_to forum.name, forum_posts_path(forum) %>
+    <%= forum.posts.size %><br>
     <% end %>  
   </div>
   <div class="panel-footer">
-    <%= link_to "建立看板", new_forum_path %>    
+    <%= link_to "建立看板", new_forum_path %>
   </div>
 </div>
