@@ -17,7 +17,8 @@
 
     <div class="panel-heading">
       <%= link_to post.title, post_path(post) %>
-      <%= post.updated_at.to_formatted_s(:short) %>
+      <%#= post.updated_at.to_formatted_s(:short) %>
+      <%= distance_of_time_in_words(post.updated_at, Time.now) %>
       <% if post.forum %>
         <%= link_to post.forum.name, forum_posts_path(post.forum) %>
       <% end %>
@@ -35,15 +36,13 @@
           <%= link_to "• #{tag.name}", posts_tag_path(tag) %>
         <% end %>
       </div>
-    
     </div>
 
-    <div class="panel-footer">
-      <%= render 'post_replies/reply', :post => post %>
-
-      <% if user_signed_in? %>    
+    <% if user_signed_in? %>  
+      <div class="panel-footer">
+        <%= render 'post_replies/reply', :post => post %>
         <div class="row-fluid">
-
+          
           <div class="">
             <%= current_user.name %>:
           </div>
@@ -54,11 +53,9 @@
               <%= f.submit "submit", :style => "display: none" %>
             <% end %>
           </div>
-
         </div>
-      <% end %>
-
-    </div>
+      </div>
+    <% end %>
     
   </div>
 <% end %>

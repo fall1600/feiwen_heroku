@@ -1,7 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <%= @post.title %>
-    <%= link_to @post.forum.name, forum_posts_path(@post.forum) %>
+    <% if @post.forum %>
+      <%= link_to @post.forum.name, forum_posts_path(@post.forum) %>
+    <% end %>
   </div>
 
   <div class="panel-body">
@@ -28,4 +30,3 @@
     <%#= link_to '真刪除', @post, method: :delete, :data => {:confirm => "你確定嗎?"} %>
   </div>
 </div>
-

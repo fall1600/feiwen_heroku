@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :find_post, :only => [:show, :edit, :update, :destroy, :fake_delete, :posts_of_this_user]
 
   def index
-    @posts = Post.where("status = ? OR status = ? AND user_id = ?", 'public', 'private', session[:user_id]).order("updated_at DESC")
+    @posts = Post.where("forum_id is NULL").where("status = ? OR status = ? AND user_id = ?", 'public', 'private', session[:user_id]).order("updated_at DESC")
     #@public_posts = Post.where(status: 'public')
     #@private_posts = Post.where(status: 'private')
     #             .where(user_id: session[:user_id])
@@ -23,10 +23,8 @@ class PostsController < ApplicationController
   end
 
   def create
-   # @forum = Forum.find(params[:forum_id])
     @post = Post.new post_params
     @post.user_id = (session[:user_id] || 1)
-    #@post.forum_id = @forum.id
     # user with id 1 is for guest if any accident
 
     if @post.save

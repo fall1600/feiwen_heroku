@@ -16,7 +16,11 @@ Rails.application.routes.draw do
   end
 
   resources :forums do
-    resources :posts, :controller => :forum_posts
+    resources :posts, :controller => :forum_posts do
+      member do
+        put :fake_delete
+      end
+    end
   end
 
   resources :users do

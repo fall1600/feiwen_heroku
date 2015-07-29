@@ -1,6 +1,7 @@
 class ForumPostsController < ApplicationController
   
-  before_action :find_forum, :only => [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:index, :show]
+  before_action :find_forum, :only => [:index, :show, :new, :create, :edit, :update, :destroy, :fake_delete]
 
   def index
     @posts = @forum.posts
@@ -18,9 +19,7 @@ class ForumPostsController < ApplicationController
     @post = @forum.posts.build post_params
     @post.user_id = (session[:user_id] || 1)
     if @post.save
-      #redirect_to post_path(@post)
       redirect_to forum_post_path(@forum, @post)
-      #redirect_to forum_post_path(@forum, @post)
     else
       render new_forum_post_path(@post)
     end
@@ -36,6 +35,18 @@ class ForumPostsController < ApplicationController
       redirect_to forum_post_path(@post)
     else
       render edit_forum_post_path(@post)
+    end
+  end
+
+  def fake_delete
+    if @post.user_id == session[:user_id]
+      @post.status = "deleted"
+      @post.save
+      flash[:notice] = "delete success"
+      redirect_to forum_posts_path(@forum)
+    else
+      flash[:alert] = "you can't delete this post"
+      redirect_to forum_posts_path(@forum)
     end
   end
 

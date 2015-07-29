@@ -10,6 +10,7 @@
       <% @posts.each do |post| %>
         <li>
           <%= link_to post.user.name, user_posts_path(post.user) %>:
+          <%#= link_to post.title, post %>
           <%= link_to post.title, post %>
           <%= post_status_signal post %>
           <%= post.updated_at.to_formatted_s(:short) %>

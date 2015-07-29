@@ -1,9 +1,6 @@
 <div class="panel panel-default">
+  <div class="panel-heading">建立看板</div>
   <div class="panel-body">
-    <%= form_for @forum do |f| %>
-    <%= f.label :name, "看板名稱: " %>
-    <%= f.text_field :name %>
-    <%= f.submit "送出"%>
-    <% end %>    
+    <%= render "form", :forum => Forum.new %>
   </div>
 </div>
