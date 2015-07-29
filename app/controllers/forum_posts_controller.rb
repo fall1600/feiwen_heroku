@@ -4,7 +4,7 @@ class ForumPostsController < ApplicationController
   before_action :find_forum, :only => [:index, :show, :new, :create, :edit, :update, :destroy, :fake_delete]
 
   def index
-    @posts = @forum.posts
+    @posts = @forum.posts.where("status = ?", "public")
   end
 
   def show
@@ -16,7 +16,7 @@ class ForumPostsController < ApplicationController
   end
 
   def create
-    @post = @forum.posts.build post_params
+    @post = @forum.posts.new post_params
     @post.user_id = (session[:user_id] || 1)
     if @post.save
       redirect_to forum_post_path(@forum, @post)
@@ -30,15 +30,17 @@ class ForumPostsController < ApplicationController
   end
 
   def update
-    #@post = @forum.posts.find(params[:id])
+    @post = Post.find(params[:id])
+      #@post = Post.find(params[:id])
     if @post.update post_params
-      redirect_to forum_post_path(@post)
+      redirect_to forum_post_path(@forum, @post)
     else
-      render edit_forum_post_path(@post)
+      render edit_forum_post_path(@forum, @post)
     end
   end
 
   def fake_delete
+    @post = Post.find(params[:id])
     if @post.user_id == session[:user_id]
       @post.status = "deleted"
       @post.save
@@ -51,9 +53,9 @@ class ForumPostsController < ApplicationController
   end
 
   def destroy
-    @post = @forum.posts.find(params[:id])
+    @post = Post.find(params[:id])
     @post.destroy
-    redirect_to forum_posts_path
+    redirect_to forum_posts_path(@forum)
   end
 
   protected

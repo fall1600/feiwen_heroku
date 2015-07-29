@@ -23,8 +23,9 @@
   </div>
   <div class="panel-footer">
     <%= link_to '新增標籤', new_post_tag_path(@post) %>
-    <%= link_to '編輯', edit_forum_post_path(@forum, @post) %>
+    <%= link_to '編輯', edit_forum_post_path(@post.forum, @post) %>
     <%= link_to '刪除', fake_delete_forum_post_path(@forum, @post), method: :put, :data => {confirm: "你確定嗎?"} %>
+    <%# this site does not support "destroy" function :) %>
     <%#= link_to '真刪除', @post, method: :delete, :data => {:confirm => "你確定嗎?"} %>
   </div>
 </div>

@@ -7,15 +7,18 @@ Rails.application.routes.draw do
   
   post :about, controller: :pages
 
-  resources :tags do
+  resources :tags, except: :destroy do
     member do
-      get :posts
+      get :posts, except: :destroy
       # if you want to build feature about hot tags 
       # get :hot 
     end
   end
 
-  resources :forums do
+  resources :forums, except: :destroy do
+    member do
+      put :fake_delete
+    end
     resources :posts, :controller => :forum_posts do
       member do
         put :fake_delete
@@ -24,19 +27,19 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :posts, :controller => :user_posts
+    resources :posts, controller: :user_posts, except: :destroy
   end
 
   # put :fake_delete, controller: :posts
-  resources :posts do
-    resources :tags, :controller => :post_tags
-    resources :replies, :controller => :post_replies
+  resources :posts, except: :destroy do
+    resources :tags, controller: :post_tags, except: :destroy
+    resources :replies, controller: :post_replies, except: :destroy
     member do
       put :fake_delete
     end
   end
 
-  resource :session, :only => [ :create, :destroy ]
+  resource :session, only: [:create, :destroy]
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

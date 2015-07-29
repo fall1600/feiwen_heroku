@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :find_forum => [:show, :edit, :update]
+  before_action :find_forum, :only => [:show, :edit, :update, :destroy]
 
   def index
     @forums = Forum.all
@@ -29,6 +29,28 @@ class ForumsController < ApplicationController
   end
 
   def update
+    if @forum.update forum_params
+      flash[:notice] = "看板編輯成功"
+      redirect_to forum_posts_path(@forum)
+    else
+      flash[:alert] = "看板編輯失敗"
+      render :edit
+    end
+  end
+
+  def fake_delete
+    @forum.status = "deleted"
+    @forum.posts.each do |post|
+      post.fake_delete
+    end
+    @forum.save
+    redirect_to forums_path
+  end
+
+  def destroy
+    @forum.posts.destroy_all
+    @forum.destroy
+    redirect_to forums_path
   end
 
   protected

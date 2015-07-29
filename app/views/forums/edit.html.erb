@@ -1,6 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">編輯看板</div>
   <div class="panel-body">
-    <%= render "form", :forum => Forum.find(params[:id]) %>
+    <%= form_for @forum, :url => forum_path(@forum) do |f| %>
+      <%= f.label :name, "看板名稱: " %>
+      <%= f.text_field :name %>
+      <%= f.submit "送出"%>
+    <% end %>
   </div>
 </div>

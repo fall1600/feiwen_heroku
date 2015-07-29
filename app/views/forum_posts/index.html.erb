@@ -4,12 +4,13 @@
   </div>
   <div class="panel-body">
   <% @posts.each do |post| %>
-    <%= link_to post.title, forum_post_path(@forum, post) %>
-    <br>
+    <%= link_to post.title, forum_post_path(@forum, post) %><br>
   <% end %>
   </div>
   <div class="panel-footer">
     <%= link_to "po 個費文", new_forum_post_path(@forum) %>
     <%= link_to "編輯看板", edit_forum_path(@forum) %>
+    <%# this site does not support "destroy" function :) %>
+    <%#= link_to "真刪除", @forum, method: :delete, :data => { :confirm => "你確定嗎?" } %>
   </div>
 </div>
