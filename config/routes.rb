@@ -1,45 +1,61 @@
 Rails.application.routes.draw do
   
   #root 'pages#posts'
-  root 'posts#index'
-  get 'pages/home'
-  get 'pages/login'
-  
-  post :about, controller: :pages
+  root "posts#index"
+  get "pages/home"
+  get "pages/login"
 
-  resources :tags, except: :destroy do
+  get "home", to: "pages#home"
+  get "login", to: "pages#login"
+
+  resources :tags,
+    except: :destroy do
     member do
-      get :posts, except: :destroy
+      get :posts,
+        except: :destroy
       # if you want to build feature about hot tags 
       # get :hot 
     end
   end
 
-  resources :forums, except: :destroy do
-    member do
-      put :fake_delete
-    end
-    resources :posts, :controller => :forum_posts do
+  resources :forums,
+    except: :destroy do
       member do
         put :fake_delete
       end
-    end
+      resources :posts,
+        except: :destroy,
+        controller: :forum_posts do
+        member do
+          put :fake_delete
+        end
+      end
   end
 
   resources :users do
-    resources :posts, controller: :user_posts, except: :destroy
+    resources :posts,
+      controller: :user_posts,
+      except: :destroy
   end
 
   # put :fake_delete, controller: :posts
-  resources :posts, except: :destroy do
-    resources :tags, controller: :post_tags, except: :destroy
-    resources :replies, controller: :post_replies, except: :destroy
-    member do
-      put :fake_delete
-    end
+  resources :posts, 
+    except: :destroy do
+      resources :tags,
+        controller: :post_tags,
+        except: :destroy
+      resources :replies,
+        controller: :post_replies,
+        except: :destroy
+      member do
+        put :fake_delete
+      end
   end
 
-  resource :session, only: [:create, :destroy]
+  resource :session,
+    only: [:create, :destroy]
+
+  #post :about, controller: :pages
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
