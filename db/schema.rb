@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729141806) do
+ActiveRecord::Schema.define(version: 20150808172544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,11 +23,19 @@ ActiveRecord::Schema.define(version: 20150729141806) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "forums", force: :cascade do |t|
-    t.string   "name"
+  create_table "forum_userships", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "forum_id"
+    t.integer  "user_id"
+  end
+
+  create_table "forums", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.string   "status"
+    t.integer  "creater_id", default: 1, null: false
   end
 
   create_table "post_tagships", force: :cascade do |t|

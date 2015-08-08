@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :find_forum, :only => [:show, :edit, :update, :destroy]
+  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join_this]
 
   def index
     @forums = Forum.all
@@ -45,6 +45,11 @@ class ForumsController < ApplicationController
     end
     @forum.save
     redirect_to forums_path
+  end
+
+  def join_this
+    @forum.users << current_user
+    redirect_to forum_path(@forum)
   end
 
   def destroy

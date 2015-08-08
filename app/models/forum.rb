@@ -9,4 +9,6 @@ class Forum < ActiveRecord::Base
   validates :status, inclusion: {in: ['public', 'private', 'deleted']}
 
   has_many :posts
+  has_many :forum_userships
+  has_many :users, :through => :forum_userships
 end

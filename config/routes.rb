@@ -23,6 +23,11 @@ Rails.application.routes.draw do
       member do
         put :fake_delete
       end
+
+      member do
+        get :join_this
+      end
+
       resources :posts,
         except: :destroy,
         controller: :forum_posts do

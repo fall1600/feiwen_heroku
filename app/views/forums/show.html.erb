@@ -1,1 +1,12 @@
 <%= @forum.name %>
+
+<ul>
+  <li><%= "creater: #{User.find(@forum.creater_id).name}" %></li>
+
+  <li><%= "member:" %></li>
+  <ul>
+    <% @forum.users.each do |user| %>
+      <%= user.name %>
+    <% end %>
+  </ul>
+</ul>
