@@ -1,0 +1,5 @@
+<%= form_for @forum do |f| %>
+  <%= f.label :name, "看板名稱: " %>
+  <%= f.text_field :name, autofocus: true %>
+  <%= f.submit "送出"%>
+<% end %>

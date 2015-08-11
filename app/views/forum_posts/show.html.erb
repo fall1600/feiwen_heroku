@@ -1,7 +1,7 @@
 <div class="panel panel-default">
   <div class="panel-heading">
+    <%= link_to @post.forum.name, forum_posts_path(@post.forum) %> - 
     <%= @post.title %>
-    <%= link_to @post.forum.name, forum_posts_path(@post.forum) %>
   </div>
 
   <div class="panel-body">

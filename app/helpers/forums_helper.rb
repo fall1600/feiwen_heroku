@@ -9,7 +9,7 @@ module ForumsHelper
     end
   end
 
-  def edit_this_forum_link
+  def edit_forum_link
     if @forum.creater_id == current_user.id
       content_tag :a, link_to("編輯看板", edit_forum_path(@forum))  
     end

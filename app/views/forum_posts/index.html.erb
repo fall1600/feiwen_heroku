@@ -3,13 +3,15 @@
     <%= link_to "#{@forum.name} 板", forum_path(@forum) %>
   </div>
   <div class="panel-body">
-  <% @posts.each do |post| %>
-    <%= link_to post.title, forum_post_path(@forum, post) %><br>
-  <% end %>
+    <ul>
+      <% @posts.each do |post| %>
+        <li><%= link_to post.title, forum_post_path(@forum, post) %></li>
+      <% end %>
+    </ul>
   </div>
   <div class="panel-footer">
     <%= post_a_feiwen_link %>
-    <%= edit_this_forum_link %>
+    <%= edit_forum_link %>
     <%= delete_join_leave_link %>
     <%#= link_to "po 個費文", new_forum_post_path(@forum) %>
     <%#= link_to "編輯看板", edit_forum_path(@forum) %>
