@@ -1,10 +1,10 @@
 class ForumsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join_this]
+  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join, :leave, :fake_delete]
 
   def index
-    @forums = Forum.all
+    @forums = Forum.all.where("status != ?", "deleted")
   end
 
   def show
@@ -16,6 +16,9 @@ class ForumsController < ApplicationController
 
   def create
     @forum = Forum.new forum_params
+    @forum.status = "private"
+    @forum.creater_id = current_user.id
+    @forum.users << current_user
     if @forum.save
       flash[:notice] = "建立成功"
       redirect_to forums_path
@@ -38,23 +41,39 @@ class ForumsController < ApplicationController
     end
   end
 
+  def join
+    unless @forum.users.include? current_user
+      @forum.users << current_user
+      flash[:notice] = "加入成功"
+    end
+    redirect_to forum_posts_path(@forum)
+  end
+
+  def leave
+    if @forum.users.include? current_user
+      @forum.users.delete current_user
+      flash[:notice] = "退出成功"
+    else
+      flash[:alert] = "退出fail"
+    end
+    redirect_to forum_posts_path(@forum)
+  end
+
   def fake_delete
     @forum.status = "deleted"
     @forum.posts.each do |post|
-      post.fake_delete
+      post.status = "deleted"
+      post.save
     end
     @forum.save
+    flash[:notice] = "此看板及其文章皆刪除"
     redirect_to forums_path
-  end
-
-  def join_this
-    @forum.users << current_user
-    redirect_to forum_path(@forum)
   end
 
   def destroy
     @forum.posts.destroy_all
     @forum.destroy
+    flash[:notice] = "此看板及其文章皆刪除 absolutely"
     redirect_to forums_path
   end
 

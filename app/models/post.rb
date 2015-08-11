@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
 
   validates :title, :content, :status, presence: true
-  validates :status, inclusion: {in: ['public', 'private', 'deleted']}
+  validates :status, inclusion: {in: ['public', 'forum', 'private', 'deleted']}
 
   before_validation :set_content_from_title
   

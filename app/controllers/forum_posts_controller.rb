@@ -1,10 +1,14 @@
 class ForumPostsController < ApplicationController
   
-  before_action :authenticate_user!, :except => [:index, :show]
+  before_action :authenticate_user!, :except => []
   before_action :find_forum, :only => [:index, :show, :new, :create, :edit, :update, :destroy, :fake_delete]
 
   def index
-    @posts = @forum.posts.where("status = ?", "public")
+    if @forum.users.include? current_user
+      @posts = @forum.posts.where("status = ? OR status = ?", "public", "forum")
+    else
+      @posts = @forum.posts.where("status = ?", "public")
+    end
   end
 
   def show
@@ -18,6 +22,7 @@ class ForumPostsController < ApplicationController
   def create
     @post = @forum.posts.new post_params
     @post.user_id = (session[:user_id] || 1)
+    @post.status = "forum"
     if @post.save
       redirect_to forum_post_path(@forum, @post)
     else

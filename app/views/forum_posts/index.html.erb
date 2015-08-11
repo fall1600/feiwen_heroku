@@ -8,9 +8,13 @@
   <% end %>
   </div>
   <div class="panel-footer">
-    <%= link_to "po 個費文", new_forum_post_path(@forum) %>
-    <%= link_to "編輯看板", edit_forum_path(@forum) %>
-    <%= link_to "join this one", join_this_forum_path(@forum) %>
+    <%= post_a_feiwen_link %>
+    <%= edit_this_forum_link %>
+    <%= delete_join_leave_link %>
+    <%#= link_to "po 個費文", new_forum_post_path(@forum) %>
+    <%#= link_to "編輯看板", edit_forum_path(@forum) %>
+    <%#= link_to "加入看板", join_this_forum_path(@forum) %>
+    <%#= link_to "退出看板 ", leave_this_forum_path(@forum) %>
     <%# this site does not support "destroy" function :) %>
     <%#= link_to "真刪除", @forum, method: :delete, :data => { :confirm => "你確定嗎?" } %>
   </div>
