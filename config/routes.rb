@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     except: :destroy do
       member do
         put :fake_delete
-        get :join, :leave
+        get :join, :leave, :cancel
       end
 
       resources :posts,

@@ -16,13 +16,7 @@ class Post < ActiveRecord::Base
 
   def init
     self.user_id = 1 unless user_id
-    self.status = "public"
-  end
-
-  def title_must_start_with_x
-    unless title.to_s.start_with? 'X'
-      errors.add(:title, 'must start with "X"')
-    end
+    #self.status = "public"
   end
 
   def set_content_from_title
@@ -32,4 +26,9 @@ class Post < ActiveRecord::Base
   #scope :own_posts, -> (user) { where("user_id = ? AND status != ?", user.id, "deleted").order("updated_at DESC") }
   #scope :others_posts, -> (user) { where("user_id = ? AND status = ?", user.id, "public").order("updated_at DESC") }
 
+  #  def title_must_start_with_x
+  #    unless title.to_s.start_with? 'X'
+  #      errors.add(:title, 'must start with "X"')
+  #    end
+  #  end
 end

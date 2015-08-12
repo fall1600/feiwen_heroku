@@ -4,10 +4,22 @@ class ForumPostsController < ApplicationController
   before_action :find_forum, :only => [:index, :show, :new, :create, :edit, :update, :destroy, :fake_delete]
 
   def index
-    if @forum.users.include? current_user
-      @posts = @forum.posts.where("status = ? OR status = ?", "public", "forum")
-    else
+    ship = ForumUsership.find_by_forum_id_and_user_id(@forum, current_user)
+
+    case ship.try(:status)
+    when "hosting"
+      @posts = @forum.posts
+    when "joined"
+      @posts = @forum.posts.where("status = ? OR status = ?", "forum", "public")
+    when "pending"
+      flash[:notice] = "you are pending, public posts only"
       @posts = @forum.posts.where("status = ?", "public")
+    when "bucketed"
+      flash[:alert] = "you are bucketed, no posts you can see"
+      @posts = []
+    else
+      flash[:notice] = "join this forum :)"
+      @posts = []
     end
   end
 

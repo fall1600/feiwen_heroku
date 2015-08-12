@@ -1,5 +1,7 @@
 <%= form_for @forum do |f| %>
   <%= f.label :name, "看板名稱: " %>
-  <%= f.text_field :name, autofocus: true %>
+  <%= f.text_field :name, autofocus: true %><br>
+  <%= f.collection_check_boxes :user_ids, User.all, :id, :name %>
+  <%#= f.collection_check_boxes :user_ids, @forum.users, :id, :name %>
   <%= f.submit "送出"%>
 <% end %>

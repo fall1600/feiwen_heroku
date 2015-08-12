@@ -1,18 +1,21 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= link_to "#{@forum.name} 板", forum_path(@forum) %>
+    <%= link_to @forum.name, forum_path(@forum) %>
   </div>
   <div class="panel-body">
     <ul>
       <% @posts.each do |post| %>
-        <li><%= link_to post.title, forum_post_path(@forum, post) %></li>
+        <li>
+        <%= link_to post.title, forum_post_path(@forum, post) %>
+        <%= post.status %>
+        </li>
       <% end %>
     </ul>
   </div>
   <div class="panel-footer">
     <%= post_a_feiwen_link %>
-    <%= edit_forum_link %>
-    <%= delete_join_leave_link %>
+    <%#= edit_forum_link %>
+    <%= action_link %>
     <%#= link_to "po 個費文", new_forum_post_path(@forum) %>
     <%#= link_to "編輯看板", edit_forum_path(@forum) %>
     <%#= link_to "加入看板", join_this_forum_path(@forum) %>

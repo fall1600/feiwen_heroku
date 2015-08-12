@@ -1,13 +1,19 @@
 class ForumsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join, :leave, :fake_delete]
+  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join, :leave, :cancel, :fake_delete]
 
   def index
     @forums = Forum.all.where("status != ?", "deleted")
   end
 
   def show
+    @users = []
+    ships = ForumUsership.where("forum_id = ? AND status = ?", @forum, "joined")
+    ships.each do |ship|
+      @users << User.find_by(:id => ship.user_id)
+    end
+    return @users
   end
 
   def new
@@ -20,6 +26,9 @@ class ForumsController < ApplicationController
     @forum.creater_id = current_user.id
     @forum.users << current_user
     if @forum.save
+      find_ship_of_forum_and_current_user
+      @ship.status = "joined"
+      @ship.save
       flash[:notice] = "建立成功"
       redirect_to forums_path
     else
@@ -44,19 +53,34 @@ class ForumsController < ApplicationController
   def join
     unless @forum.users.include? current_user
       @forum.users << current_user
-      flash[:notice] = "加入成功"
     end
+    find_ship_of_forum_and_current_user
+    @ship.status = "pending"
+    @ship.save
+    flash[:notice] = "加入成功"
     redirect_to forum_posts_path(@forum)
   end
 
   def leave
     if @forum.users.include? current_user
-      @forum.users.delete current_user
+      find_ship_of_forum_and_current_user
+      @ship.status = "left"
+      @ship.save
+      #@forum.users.delete current_user
+      # not really deleted :)
       flash[:notice] = "退出成功"
     else
       flash[:alert] = "退出fail"
     end
     redirect_to forum_posts_path(@forum)
+  end
+
+  def cancel
+    if @forum.users.include? current_user
+      @forum.users.delete current_user
+    end
+    flash[:notice] = "取消申請"
+    redirect_to forums_path(@forum)
   end
 
   def fake_delete
@@ -84,7 +108,11 @@ class ForumsController < ApplicationController
   end
 
   def forum_params
-    params.require(:forum).permit(:name)
+    params.require(:forum).permit(:name, :user_ids=>[])
+  end
+
+  def find_ship_of_forum_and_current_user
+    @ship = ForumUsership.find_by_forum_id_and_user_id(@forum, current_user)
   end
 
 end

@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= link_to "#{@forum.name} 板", forum_posts_path(@forum) %>
+    <%= link_to "#{@forum.name} 板資訊", forum_posts_path(@forum) %>
   </div>
 
   <div class="panel-body">
@@ -8,7 +8,7 @@
       <li>創板人: <%= link_to User.find(@forum.creater_id).name, user_posts_path(@forum.creater_id) %></li>
       <li><%= "板友:" %></li>
       <ul>
-        <% @forum.users.each do |user| %>
+        <% @users.each do |user| %>
           <li><%= link_to user.name, user_posts_path(user) %></li>
         <% end %>
       </ul>
