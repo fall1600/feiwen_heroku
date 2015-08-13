@@ -27,7 +27,7 @@ class ForumsController < ApplicationController
     @forum.users << current_user
     if @forum.save
       find_ship_of_forum_and_current_user
-      @ship.status = "joined"
+      @ship.status = "hosting"
       @ship.save
       flash[:notice] = "建立成功"
       redirect_to forums_path
