@@ -6,11 +6,35 @@
   <div class="panel-body">
     <ul>
       <li>創板人: <%= link_to User.find(@forum.creater_id).name, user_posts_path(@forum.creater_id) %></li>
-      <li><%= "板友:" %></li>
+      <li>板友:</li>
       <ul>
-        <% @users.each do |user| %>
-          <li><%= link_to user.name, user_posts_path(user) %></li>
+        <% @joined_users.each do |user| %>
+          <li>
+            <%= link_to user.name, user_posts_path(user) %>
+            <%= link_to "水桶", bucket_forum_user_path(@forum, user), method: :put %>
+            <%= link_to "放到申請中", pend_forum_user_path(@forum, user), method: :put %>
+          </li>
         <% end %>
+      </ul>
+      <li>申請加入:</li>
+      <ul>
+        <% @pending_users.each do |user| %>
+        <li>
+          <%= link_to user.name, user_posts_path(user) %>
+          <%= link_to "確認加入", confirm_join_forum_user_path(@forum, user), method: :put %>
+        </li>
+        <% end %>
+      </ul>
+      <li>水桶中:</li>
+        <ul>
+          <% @bucketed_users.each do |user| %>
+            <li>
+              <%= link_to user.name, user_posts_path(user) %>
+              <%= link_to "回復資格", confirm_join_forum_user_path(@forum, user), method: :put %>
+            </li>
+          <% end %>
+        </ul>
+      <ul>
       </ul>
     </ul>
   </div>

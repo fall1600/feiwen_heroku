@@ -5,6 +5,7 @@ class ForumPostsController < ApplicationController
 
   def index
     ship = ForumUsership.find_by_forum_id_and_user_id(@forum, current_user)
+    @ships = ForumUsership.where("status = ? and forum_id = ?", "pending", @forum )
 
     case ship.try(:status)
     when "hosting"

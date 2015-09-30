@@ -1,19 +1,28 @@
 class ForumsController < ApplicationController
   
   before_action :authenticate_user!, :except => [:index, :show]
-  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join, :leave, :cancel, :fake_delete]
+  before_action :find_forum, :only => [:show, :edit, :update, :destroy, :join, :leave, :cancel, :fake_delete, :check_joi, :kick_out]
 
   def index
     @forums = Forum.all.where("status != ?", "deleted")
   end
 
   def show
-    @users = []
-    ships = ForumUsership.where("forum_id = ? AND status = ?", @forum, "joined")
+    @joined_users = []
+    @pending_users = []
+    @bucketed_users = []
+
+    ships = ForumUsership.where("forum_id = ?", @forum)
     ships.each do |ship|
-      @users << User.find_by(:id => ship.user_id)
+      case ship.status
+      when "joined"
+        @joined_users << User.find_by(:id => ship.user_id)
+      when "pending"
+        @pending_users << User.find_by(:id => ship.user_id)
+      when "bucketed"
+        @bucketed_users << User.find_by(:id => ship.user_id)
+      end
     end
-    return @users
   end
 
   def new
@@ -48,6 +57,11 @@ class ForumsController < ApplicationController
       flash[:alert] = "看板編輯失敗"
       render :edit
     end
+  end
+
+  def check_join
+    ships = ForumUsership.where("status = ?", "pending").find_by_forum_id(@forum)
+    redirect_to :check_join_forum
   end
 
   def join
@@ -94,6 +108,18 @@ class ForumsController < ApplicationController
     redirect_to forums_path
   end
 
+  def bucket
+    set_ship_status "bucketed"
+  end
+
+  def confirm_join
+    set_ship_status "joined"
+  end
+
+  def pend
+    set_ship_status "pending"
+  end
+
   def destroy
     @forum.posts.destroy_all
     @forum.destroy
@@ -113,6 +139,16 @@ class ForumsController < ApplicationController
 
   def find_ship_of_forum_and_current_user
     @ship = ForumUsership.find_by_forum_id_and_user_id(@forum, current_user)
+  end
+
+  def set_ship_status status
+    user = User.find(params[:id])
+    forum = Forum.find(params[:forum_id])
+    ship = ForumUsership.find_by_forum_id_and_user_id(forum, user)
+    ship.status = status
+    if ship.save
+      redirect_to forum
+    end
   end
 
 end

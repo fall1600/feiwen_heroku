@@ -16,6 +16,10 @@ module ForumsHelper
     end
   end
 
+  def members_wanna_join
+    content_tag :a, link_to("誰想加入", check_join_form_path(@forum))
+  end
+
   def post_a_feiwen_link
     find_ship
     if @ship.try(:status) == "hosting" || @ship.try(:status) == "joined"

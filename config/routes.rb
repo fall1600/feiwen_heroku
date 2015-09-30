@@ -32,6 +32,14 @@ Rails.application.routes.draw do
           put :fake_delete
         end
       end
+
+      resources :users,
+        except: :destroy, 
+        controller: :forums do
+          member do
+            put :bucket, :confirm_join, :pend
+        end
+      end
   end
 
   resources :users do
