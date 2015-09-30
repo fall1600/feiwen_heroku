@@ -13,16 +13,19 @@ class ForumsController < ApplicationController
     @bucketed_users = []
 
     ships = ForumUsership.where("forum_id = ?", @forum)
+    users = User.all
+
     ships.each do |ship|
       case ship.status
       when "joined"
-        @joined_users << User.find_by(:id => ship.user_id)
+        @joined_users << users.find_by(:id => ship.user_id)
       when "pending"
-        @pending_users << User.find_by(:id => ship.user_id)
+        @pending_users << users.find_by(:id => ship.user_id)
       when "bucketed"
-        @bucketed_users << User.find_by(:id => ship.user_id)
+        @bucketed_users << users.find_by(:id => ship.user_id)
       end
     end
+    
   end
 
   def new
